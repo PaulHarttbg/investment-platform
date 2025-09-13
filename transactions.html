@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - WINNING EDGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #1a2a6c;
+            --secondary-color: #b21f1f;
+            --accent-color: #fdbb2d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --gray-50: #f8f9fa;
+            --gray-100: #f1f3f5;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #868e96;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --white: #ffffff;
+            --spacing-1: 0.25rem;
+            --spacing-2: 0.5rem;
+            --spacing-3: 0.75rem;
+            --spacing-4: 1rem;
+            --spacing-5: 1.25rem;
+            --spacing-6: 1.5rem;
+            --spacing-8: 2rem;
+            --spacing-10: 2.5rem;
+            --spacing-12: 3rem;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --radius: 0.375rem;
+            --radius-lg: 0.5rem;
+            --radius-xl: 0.75rem;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7f9;
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 16px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-inner {
+            width: 30px;
+            height: 30px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+        }
+        
+        .logo-text {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 20px;
+        }
+        
+        .user-menu {
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* Button Styles */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Main Content */
+        .dashboard-main {
+            padding: 40px 0;
+        }
+        
+        .transactions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .transactions-header {
+            text-align: center;
+            margin-bottom: var(--spacing-10);
+        }
+        
+        .transactions-header h1 {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: var(--spacing-2);
+        }
+        
+        .transactions-header p {
+            font-size: var(--font-size-lg);
+            color: var(--gray-600);
+        }
+        
+        /* Filters */
+        .transactions-filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+            background: var(--white);
+            padding: var(--spacing-6);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-2);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: var(--font-size-sm);
+        }
+        
+        .form-input {
+            padding: 10px 12px;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            font-family: 'Inter', sans-serif;
+            font-size: var(--font-size-base);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.1);
+        }
+        
+        /* Summary Cards */
+        .transactions-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+        }
+        
+        .summary-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .summary-info h3 {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: var(--spacing-2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .summary-amount {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .summary-icon {
+            font-size: var(--font-size-3xl);
+            color: var(--primary-color);
+            opacity: 0.2;
+        }
+        
+        /* Transactions Table */
+        .transactions-table {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            margin-bottom: var(--spacing-6);
+        }
+        
+        .transactions-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .transactions-table th,
+        .transactions-table td {
+            padding: var(--spacing-4);
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .transactions-table th {
+            font-weight: 600;
+            color: var(--gray-700);
+            background: var(--gray-50);
+            position: sticky;
+            top: 0;
+        }
+        
+        .transactions-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .transactions-table tr:hover {
+            background: var(--gray-50);
+        }
+        
+        /* Transaction Type Badges */
+        .transaction-type {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .type-deposit {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+        
+        .type-investment {
+            background: rgba(26, 42, 108, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .type-profit {
+            background: rgba(253, 187, 45, 0.1);
+            color: var(--accent-color);
+        }
+        
+        .type-withdrawal {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+        }
+        
+        /* Amount Styling */
+        .amount {
+            font-weight: 600;
+        }
+        
+        .positive {
+            color: var(--success-color);
+        }
+        
+        .negative {
+            color: var(--danger-color);
+        }
+        
+        /* Status Badges */
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-completed {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .status-cancelled {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-4);
+        }
+        
+        .page-info {
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+        
+        /* No Data */
+        .no-data {
+            text-align: center;
+            color: var(--gray-500);
+            font-style: italic;
+            padding: var(--spacing-8) !important;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+            animation: slideInRight 0.3s ease-out;
+            max-width: 350px;
+        }
+        
+        .notification-success {
+            background: var(--success-color);
+        }
+        
+        .notification-error {
+            background: var(--danger-color);
+        }
+        
+        .notification-info {
+            background: var(--primary-color);
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .transactions-filters {
+                grid-template-columns: 1fr;
+            }
+            
+            .transactions-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .transactions-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-nav {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .user-menu {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            
+            .pagination {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .transactions-header h1 {
+                font-size: var(--font-size-2xl);
+            }
+            
+            .transactions-header p {
+                font-size: var(--font-size-base);
+            }
+            
+            .summary-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .summary-icon {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="container">
+            <nav class="dashboard-nav">
+                <div class="logo-container">
+                    <div class="logo-circle">
+                        <div class="logo-inner">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <span class="logo-text">WINNING EDGE</span>
+                </div>
+                <div class="user-menu">
+                    <a href="dashboard.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Dashboard
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="transactions-container">
+                <div class="transactions-header">
+                    <h1>Transaction History</h1>
+                    <p>Complete record of all your financial activities</p>
+                </div>
+
+                <div class="transactions-filters">
+                    <div class="filter-group">
+                        <label class="form-label">Date Range</label>
+                        <select class="form-input" id="dateFilter">
+                            <option value="all">All Time</option>
+                            <option value="7days">Last 7 Days</option>
+                            <option value="30days">Last 30 Days</option>
+                            <option value="90days">Last 90 Days</option>
+                            <option value="1year">Last Year</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Transaction Type</label>
+                        <select class="form-input" id="typeFilter">
+                            <option value="all">All Types</option>
+                            <option value="deposit">Deposits</option>
+                            <option value="investment">Investments</option>
+                            <option value="profit">Profits</option>
+                            <option value="withdrawal">Withdrawals</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Status</label>
+                        <select class="form-input" id="statusFilter">
+                            <option value="all">All Status</option>
+                            <option value="completed">Completed</option>
+                            <option value="pending">Pending</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="exportTransactions()">
+                        <i class="fas fa-download"></i>
+                        Export
+                    </button>
+                </div>
+
+                <div class="transactions-summary">
+                    <div class="summary-card">
+                        <div class="summary-info">
+                            <h3>Total Deposits</h3>
+                            <div class="summary-amount" id="totalDeposits">$0.00</div>
+                        </div>
+                        <div class="summary-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-info">
+                            <h3>Total Investments</h3>
+                            <div class="summary-amount" id="totalInvestments">$0.00</div>
+                        </div>
+                        <div class="summary-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-info">
+                            <h3>Total Profits</h3>
+                            <div class="summary-amount" id="totalProfits">$0.00</div>
+                        </div>
+                        <div class="summary-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-info">
+                            <h3>Total Withdrawals</h3>
+                            <div class="summary-amount" id="totalWithdrawals">$0.00</div>
+                        </div>
+                        <div class="summary-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transactions-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Reference</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsTableBody">
+                            <!-- Transactions will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <button class="btn btn-secondary" id="prevPage" onclick="changePage(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                        Previous
+                    </button>
+                    <span class="page-info">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+                    <button class="btn btn-secondary" id="nextPage" onclick="changePage(1)">
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let allTransactions = [];
+        let filteredTransactions = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTransactions();
+            initializeFilters();
+        });
+
+        function loadTransactions() {
+            // Sample transaction data
+            allTransactions = [
+                { date: '2024-01-15', type: 'deposit', description: 'Bitcoin Deposit', amount: 1000, status: 'completed', reference: 'DEP001' },
+                { date: '2024-01-16', type: 'investment', description: 'Professional Package Investment', amount: 1000, status: 'completed', reference: 'INV001' },
+                { date: '2024-02-15', type: 'profit', description: 'Monthly Profit Distribution', amount: 83.33, status: 'completed', reference: 'PRF001' },
+                { date: '2024-03-15', type: 'profit', description: 'Monthly Profit Distribution', amount: 83.33, status: 'completed', reference: 'PRF002' },
+                { date: '2024-04-15', type: 'profit', description: 'Monthly Profit Distribution', amount: 83.33, status: 'completed', reference: 'PRF003' },
+                { date: '2024-04-20', type: 'withdrawal', description: 'Profit Withdrawal', amount: 250, status: 'pending', reference: 'WTH001' },
+                { date: '2024-05-01', type: 'deposit', description: 'Litecoin Deposit', amount: 2500, status: 'completed', reference: 'DEP002' },
+                { date: '2024-05-02', type: 'investment', description: 'Premium Package Investment', amount: 2500, status: 'completed', reference: 'INV002' },
+                { date: '2024-06-01', type: 'profit', description: 'Monthly Profit Distribution', amount: 250, status: 'completed', reference: 'PRF004' },
+                { date: '2024-07-01', type: 'profit', description: 'Monthly Profit Distribution', amount: 250, status: 'completed', reference: 'PRF005' },
+                { date: '2024-07-15', type: 'deposit', description: 'Ethereum Deposit', amount: 1500, status: 'completed', reference: 'DEP003' },
+                { date: '2024-07-16', type: 'investment', description: 'Starter Package Investment', amount: 1500, status: 'completed', reference: 'INV003' },
+                { date: '2024-08-01', type: 'profit', description: 'Monthly Profit Distribution', amount: 100, status: 'completed', reference: 'PRF006' },
+                { date: '2024-08-10', type: 'withdrawal', description: 'Profit Withdrawal', amount: 300, status: 'completed', reference: 'WTH002' }
+            ];
+
+            filteredTransactions = [...allTransactions];
+            updateSummary();
+            displayTransactions();
+        }
+
+        function initializeFilters() {
+            document.getElementById('dateFilter').addEventListener('change', applyFilters);
+            document.getElementById('typeFilter').addEventListener('change', applyFilters);
+            document.getElementById('statusFilter').addEventListener('change', applyFilters);
+        }
+
+        function applyFilters() {
+            const dateFilter = document.getElementById('dateFilter').value;
+            const typeFilter = document.getElementById('typeFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+
+            filteredTransactions = allTransactions.filter(transaction => {
+                let dateMatch = true;
+                let typeMatch = true;
+                let statusMatch = true;
+
+                // Date filter
+                if (dateFilter !== 'all') {
+                    const transactionDate = new Date(transaction.date);
+                    const now = new Date();
+                    const daysAgo = {
+                        '7days': 7,
+                        '30days': 30,
+                        '90days': 90,
+                        '1year': 365
+                    }[dateFilter];
+                    
+                    const cutoffDate = new Date(now.getTime() - (daysAgo * 24 * 60 * 60 * 1000));
+                    dateMatch = transactionDate >= cutoffDate;
+                }
+
+                // Type filter
+                if (typeFilter !== 'all') {
+                    typeMatch = transaction.type === typeFilter;
+                }
+
+                // Status filter
+                if (statusFilter !== 'all') {
+                    statusMatch = transaction.status === statusFilter;
+                }
+
+                return dateMatch && typeMatch && statusMatch;
+            });
+
+            currentPage = 1;
+            updateSummary();
+            displayTransactions();
+        }
+
+        function updateSummary() {
+            const summary = filteredTransactions.reduce((acc, transaction) => {
+                if (transaction.status === 'completed') {
+                    switch (transaction.type) {
+                        case 'deposit':
+                            acc.deposits += transaction.amount;
+                            break;
+                        case 'investment':
+                            acc.investments += transaction.amount;
+                            break;
+                        case 'profit':
+                            acc.profits += transaction.amount;
+                            break;
+                        case 'withdrawal':
+                            acc.withdrawals += transaction.amount;
+                            break;
+                    }
+                }
+                return acc;
+            }, { deposits: 0, investments: 0, profits: 0, withdrawals: 0 });
+
+            document.getElementById('totalDeposits').textContent = `$${summary.deposits.toFixed(2)}`;
+            document.getElementById('totalInvestments').textContent = `$${summary.investments.toFixed(2)}`;
+            document.getElementById('totalProfits').textContent = `$${summary.profits.toFixed(2)}`;
+            document.getElementById('totalWithdrawals').textContent = `$${summary.withdrawals.toFixed(2)}`;
+        }
+
+        function displayTransactions() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageTransactions = filteredTransactions.slice(startIndex, endIndex);
+
+            const tbody = document.getElementById('transactionsTableBody');
+            
+            if (pageTransactions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">No transactions found</td></tr>';
+            } else {
+                tbody.innerHTML = pageTransactions.map(transaction => `
+                    <tr>
+                        <td>${new Date(transaction.date).toLocaleDateString()}</td>
+                        <td><span class="transaction-type type-${transaction.type}">${transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}</span></td>
+                        <td>${transaction.description}</td>
+                        <td class="amount ${transaction.type === 'withdrawal' ? 'negative' : 'positive'}">
+                            ${transaction.type === 'withdrawal' ? '-' : '+'}$${transaction.amount.toFixed(2)}
+                        </td>
+                        <td><span class="status status-${transaction.status}">${transaction.status.charAt(0).toUpperCase() + transaction.status.slice(1)}</span></td>
+                        <td>${transaction.reference}</td>
+                    </tr>
+                `).join('');
+            }
+
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('totalPages').textContent = totalPages;
+            
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
+            const newPage = currentPage + direction;
+            
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                displayTransactions();
+            }
+        }
+
+        function exportTransactions() {
+            const csvContent = [
+                ['Date', 'Type', 'Description', 'Amount', 'Status', 'Reference'],
+                ...filteredTransactions.map(t => [
+                    t.date,
+                    t.type,
+                    t.description,
+                    t.amount,
+                    t.status,
+                    t.reference
+                ])
+            ].map(row => row.join(',')).join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'transactions.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+
+            showNotification('Transaction history exported successfully!', 'success');
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

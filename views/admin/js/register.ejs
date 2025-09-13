@@ -1,0 +1,196 @@
+<%- include('partials/header', { title: 'Create Account', stylesheet: 'auth' }) %>
+    
+<div class="auth-layout">
+    <div class="auth-sidebar">
+        <div class="auth-sidebar-content">
+            <div class="logo-container">
+                <!-- Using Font Awesome icon as a placeholder for logo -->
+                <i class="fas fa-chart-line logo-header" style="color: white; font-size: 40px; margin-bottom: 20px;"></i>
+                <span class="logo-text" style="font-size: 24px;">WINNING EDGE</span>
+            </div>
+            <h1>Join Our Platform</h1>
+            <p>Start your investment journey with our secure, professional platform. Get access to exclusive investment packages and expert portfolio management.</p>
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <i class="fas fa-certificate"></i>
+                    <span>SEC Registered</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-globe"></i>
+                    <span>Global Platform</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-award"></i>
+                    <span>A+ Rating</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-shield-check"></i>
+                    <span>256-bit SSL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">Create Account</h1>
+                <p class="auth-subtitle">Join thousands of successful investors</p>
+            </div>
+
+            <!-- Registration Form -->
+            <form id="registerForm" method="POST" autocomplete="on">
+                <div class="form-group">
+                    <label class="form-label" for="registrationToken">Registration Token</label>
+                    <div class="input-group">
+                        <i class="fas fa-key input-icon"></i>
+                        <input type="text" class="form-input" id="registrationToken" name="registrationToken" placeholder="Enter your registration token" required autocomplete="off">
+                    </div>
+                    <small class="form-help">Contact admin to get your registration token</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">First Name</label>
+                        <div class="input-group">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" class="form-input" id="firstName" name="firstName" placeholder="First name" required autocomplete="given-name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="lastName">Last Name</label>
+                        <div class="input-group">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" class="form-input" id="lastName" name="lastName" placeholder="Last name" required autocomplete="family-name">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-input" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input 
+                            type="password"
+                            class="form-input"
+                            id="password" 
+                            name="password" 
+                            placeholder="Create a strong password" 
+                            required
+                            autocomplete="new-password"
+                            aria-describedby="passwordHelp passwordRequirements"
+                        >
+                        <button 
+                            type="button" 
+                            class="password-toggle" 
+                            data-target="password"
+                            aria-label="Toggle password visibility"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <small id="passwordHelp" class="form-text text-muted">
+                        Use 8+ characters with a mix of letters, numbers & symbols
+                    </small>
+                    <div class="password-strength">
+                        <progress 
+                            id="passwordStrength" 
+                            class="password-strength-meter" 
+                            value="0" 
+                            max="100"
+                            aria-hidden="true"
+                        ></progress>
+                        <div id="passwordStrengthText" class="password-strength-text" aria-live="polite">
+                            Password strength: None
+                        </div>
+                        <ul 
+                            id="passwordRequirements" 
+                            class="password-requirements"
+                            aria-live="polite"
+                            role="alert"
+                        ></ul>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">Confirm Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input 
+                            type="password"
+                            class="form-input"
+                            id="confirmPassword" 
+                            name="confirmPassword" 
+                            placeholder="Confirm your password" 
+                            required 
+                            autocomplete="new-password"
+                            aria-describedby="passwordMatchError"
+                        >
+                        <button 
+                            type="button" 
+                            class="password-toggle" 
+                            data-target="confirmPassword"
+                            aria-label="Toggle password visibility"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div id="passwordMatchError" class="text-danger small mt-1" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> Passwords do not match
+                    </div>
+                    </div>
+                </div>
+
+                <div class="form-group terms-checkbox">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required autocomplete="off">
+                        <label for="agreeTerms">I agree to the <a href="/terms" target="_blank">Terms & Conditions</a> and <a href="/privacy" target="_blank">Privacy Policy</a></label>
+                    </div>
+                    <div id="termsError" class="error-message">
+                        You must agree to the terms and conditions
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-user-plus"></i>
+                    Create Account
+                </button>
+
+                <div class="auth-divider">
+                    <span>Already have an account?</span>
+                </div>
+
+                <a href="/login" class="btn btn-secondary btn-full">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </a>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <div class="success-content">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Registration Successful!</h3>
+                    <p>Your account has been created successfully.</p>
+                    <div class="user-credentials">
+                        <div class="credential-item">
+                            <span class="credential-label">Your Login ID:</span>
+                            <span class="credential-value" id="generatedLoginId">WE123456</span>
+                        </div>
+                    </div>
+                    <p class="credential-note">Please save your Login ID. You'll need it to sign in.</p>
+                    <a href="/login" class="btn btn-primary">Continue to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer', { script: 'register' }) %>

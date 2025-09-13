@@ -1,0 +1,67 @@
+body {
+    overflow: hidden;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    font-family: 'Inter', sans-serif;
+}
+
+.logo-header {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+.logo-header:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.auth-header h2 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-2);
+}
+
+.security-notice {
+    background: var(--accent-50);
+    border: 1px solid var(--accent-200);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-3);
+    margin: var(--spacing-4) 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.security-notice i {
+    color: var(--accent-color);
+    font-size: var(--font-size-lg);
+}
+
+.security-notice p {
+    color: var(--accent-700);
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    color: var(--gray-600);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--primary-color);
+}
+
+.input-group i.fa-user-shield {
+    color: var(--primary-color);
+}

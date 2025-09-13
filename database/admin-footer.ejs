@@ -1,0 +1,121 @@
+    </div> <!-- .admin-container -->
+
+    <!-- User Details Modal -->
+    <div class="modal" id="viewUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>User Details</h3>
+                <button class="modal-close" data-action="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="viewUserDetails"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-action="closeModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal" id="editUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit User</h3>
+                <button class="modal-close" data-action="closeModal">&times;</button>
+            </div>
+            <form id="editUserForm">
+                <div class="modal-body">
+                    <input type="hidden" id="editUserId">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" id="editUserName">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="editUserEmail">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Account Balance</label>
+                        <input type="number" class="form-input" id="editUserBalance" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Total Invested</label>
+                        <input type="number" class="form-input" id="editUserInvested" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Total Profit</label>
+                        <input type="number" class="form-input" id="editUserProfit" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select class="form-input" id="editUserStatus">
+                            <option value="active">Active</option>
+                            <option value="pending">Pending</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-action="closeModal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Deposit Modal -->
+    <div class="modal" id="viewDepositModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Deposit Details</h3>
+                <button class="modal-close" data-action="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="viewDepositDetails"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-action="closeModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Transaction Modal -->
+    <div class="modal" id="viewTransactionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Transaction Details</h3>
+                <button class="modal-close" data-action="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="viewTransactionDetails"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-action="closeModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Token Generation Modal -->
+    <div class="modal" id="tokenModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Generate Registration Token</h3>
+                <button type="button" class="modal-close" data-action="closeModal">&times;</button>
+            </div>
+            <form id="tokenForm">
+                <div class="modal-body">
+                    <!-- Form content from original HTML -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelTokenModalBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="createTokenBtn">Generate Token</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Core Admin JS -->
+    <script src="/js/utils.js"></script>
+    <script src="/admin/js/admin.js"></script>
+    
+    <!-- Feature-specific JS -->
+    <script src="/admin/js/users.js"></script>
+    <script src="/admin/js/tokens.js"></script>
+    <script src="/admin/js/deposits.js"></script>
+    <script src="/admin/js/transactions.js"></script>
+</body>
+</html>

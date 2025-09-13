@@ -1,0 +1,190 @@
+/* Navigation Styles */
+.navbar {
+    background: var(--primary-color);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-circle {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.logo-text {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.nav-link:hover {
+    color: #FFD700;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Auth Links */
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: 1rem;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.auth-links .nav-link {
+    padding: 0.25rem 0.5rem;
+}
+
+.auth-links .divider {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Mobile Menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Ensure nav menu is visible on mobile */
+@media (max-width: 992px) {
+    .nav-menu {
+        display: flex !important; /* Override any other styles */
+        visibility: hidden;
+        opacity: 0;
+        position: fixed;
+        left: 0;
+        top: 72px;
+        gap: 0.5rem;
+        flex-direction: column;
+        background-color: var(--primary-color);
+        width: 100%;
+        text-align: center;
+        transition: all 0.3s ease;
+        padding: 1rem 0;
+        z-index: 1000;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu.active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .auth-links {
+        display: flex !important; /* Ensure auth links are visible */
+        margin: 0.5rem auto;
+        justify-content: center;
+        width: 90%;
+        padding: 0.75rem;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+
+    .auth-links {
+        margin: 0.5rem auto;
+        justify-content: center;
+        width: 90%;
+        padding: 0.75rem;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 0.75rem 0;
+    }
+}
+
+/* Active State */
+.nav-link.active {
+    color: #FFD700;
+    font-weight: 600;
+}

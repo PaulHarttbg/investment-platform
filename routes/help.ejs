@@ -1,0 +1,261 @@
+<%- include('partials/header', { title: 'Help Center', stylesheet: 'help' }) %>
+
+<main>
+    <section class="help-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Help Center</h1>
+                <p class="hero-subtitle">Find answers to your questions and get the support you need</p>
+                <div class="help-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for help articles..." id="helpSearch">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="help-categories">
+        <div class="container">
+            <h2>Popular Help Topics</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="showCategory('getting-started')">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Getting Started</h3>
+                    <p>Learn the basics of using WINNING EDGE</p>
+                </div>
+                <div class="category-card" onclick="showCategory('account')">
+                    <i class="fas fa-user-cog"></i>
+                    <h3>Account Management</h3>
+                    <p>Manage your account settings and profile</p>
+                </div>
+                <div class="category-card" onclick="showCategory('investments')">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Investments</h3>
+                    <p>Understanding investment packages and returns</p>
+                </div>
+                <div class="category-card" onclick="showCategory('deposits')">
+                    <i class="fas fa-coins"></i>
+                    <h3>Deposits & Withdrawals</h3>
+                    <p>How to fund your account and withdraw profits</p>
+                </div>
+                <div class="category-card" onclick="showCategory('security')">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Security</h3>
+                    <p>Keep your account safe and secure</p>
+                </div>
+                <div class="category-card" onclick="showCategory('troubleshooting')">
+                    <i class="fas fa-tools"></i>
+                    <h3>Troubleshooting</h3>
+                    <p>Solve common issues and problems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        How do I create an account? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        To create an account, you'll need a registration token from an existing member. Once you have a token, click on the Register button in the top navigation, enter your token, and follow the registration process.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What is the minimum investment? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        The minimum investment amount varies by package. Our Starter package has a minimum of $500, Professional requires $2,000, and Premium starts at $5,000.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        How often are profits distributed? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Profits are distributed monthly on the same day you made your initial investment. You can choose to withdraw your profits or reinvest them for compound growth.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What cryptocurrencies do you accept? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We currently accept Bitcoin (BTC), Ethereum (ETH), Litecoin (LTC), and USDT (ERC-20 and TRC-20). More cryptocurrencies will be added in the future.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        How long do withdrawals take? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Withdrawals are typically processed within 24 hours. During high volume periods, it may take up to 48 hours. Crypto withdrawals depend on network congestion.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="help-content">
+        <div class="container">
+            <div class="help-articles" id="helpArticles">
+                <div class="article-category active" id="getting-started">
+                    <h2>Getting Started</h2>
+                    <div class="articles-list">
+                        <div class="article-item">
+                            <h3>How to Create an Account</h3>
+                            <p>Step-by-step guide to registering with WINNING EDGE using your registration token.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Understanding Investment Packages</h3>
+                            <p>Learn about our three investment packages and choose the right one for you.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Making Your First Investment</h3>
+                            <p>Complete guide to making your first investment and tracking your returns.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article-category" id="account">
+                    <h2>Account Management</h2>
+                    <div class="articles-list">
+                        <div class="article-item">
+                            <h3>Updating Your Profile Information</h3>
+                            <p>How to update your personal information and contact details.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Changing Your Password</h3>
+                            <p>Steps to update your account password for better security.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Notification Preferences</h3>
+                            <p>Customize how you receive updates about your investments.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article-category" id="investments">
+                    <h2>Investments</h2>
+                    <div class="articles-list">
+                        <div class="article-item">
+                            <h3>How Returns Are Calculated</h3>
+                            <p>Understanding how we calculate and distribute monthly profits.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Investment Duration and Lock Periods</h3>
+                            <p>Learn about investment terms and when you can access your funds.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Reinvesting Your Profits</h3>
+                            <p>How to reinvest your monthly profits for compound growth.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article-category" id="deposits">
+                    <h2>Deposits & Withdrawals</h2>
+                    <div class="articles-list">
+                        <div class="article-item">
+                            <h3>How to Deposit Cryptocurrency</h3>
+                            <p>Complete guide to depositing Bitcoin, Litecoin, and Ethereum.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Withdrawal Methods and Fees</h3>
+                            <p>Understanding available withdrawal options and associated fees.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Processing Times</h3>
+                            <p>How long deposits and withdrawals take to process.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article-category" id="security">
+                    <h2>Security</h2>
+                    <div class="articles-list">
+                        <div class="article-item">
+                            <h3>Two-Factor Authentication</h3>
+                            <p>How to enable 2FA for enhanced account security.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Recognizing Phishing Attempts</h3>
+                            <p>How to identify and avoid fraudulent emails and websites.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Secure Password Practices</h3>
+                            <p>Best practices for creating and maintaining strong passwords.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article-category" id="troubleshooting">
+                    <h2>Troubleshooting</h2>
+                    <div class="articles-list">
+                        <div class="article-item">
+                            <h3>Login Issues</h3>
+                            <p>Solutions for common login problems and account access issues.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Missing Deposits</h3>
+                            <p>What to do if your cryptocurrency deposit doesn't appear.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-item">
+                            <h3>Browser Compatibility</h3>
+                            <p>Ensuring your browser works properly with our platform.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="help-contact">
+        <div class="container">
+            <div class="contact-banner">
+                <div class="contact-content">
+                    <h2>Still Need Help?</h2>
+                    <p>Our support team is available 24/7 to assist you with any questions or issues.</p>
+                    <div class="contact-options">
+                        <a href="/contact" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i>
+                            Contact Support
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-comments"></i>
+                            Live Chat
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer', { script: 'help' }) %>

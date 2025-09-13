@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - WINNING EDGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="container">
+            <nav class="dashboard-nav">
+                <a href="/dashboard" class="logo-container" style="text-decoration: none;">
+                    <div class="logo-circle">
+                        <div class="logo-inner">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <span class="logo-text">WINNING EDGE</span>
+                </a>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <div class="user-name" id="userName">Loading...</div>
+                        <div class="user-id" id="userLoginId"></div>
+                    </div>
+                    <div class="user-avatar" id="userAvatar"></div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="/profile"><i class="fas fa-user"></i> Profile</a>
+                            <a href="/deposit"><i class="fas fa-plus"></i> Deposit</a>
+                            <a href="/withdrawal"><i class="fas fa-minus"></i> Withdraw</a>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">

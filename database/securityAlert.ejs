@@ -1,0 +1,33 @@
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e0e0e0;">
+    <div style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); padding: 40px 20px; text-align: center;">
+        <h1 style="color: #ffffff; margin: 0; font-size: 28px;">Security Alert</h1>
+        <p style="color: #ffffff; margin: 10px 0 0 0; font-size: 16px;"><%= alertType %></p>
+    </div>
+    <div style="padding: 40px 20px;">
+        <h2 style="color: #dc3545; margin-bottom: 20px;">Hello <%= firstName || 'User' %>,</h2>
+        <p style="color: #333; line-height: 1.6; margin-bottom: 30px;">
+            We detected unusual activity on your account and wanted to alert you immediately.
+        </p>
+        <div style="background: #f8d7da; border: 1px solid #f5c6cb; padding: 20px; border-radius: 5px; margin: 30px 0;">
+            <h3 style="color: #721c24; margin-top: 0;">Alert Details:</h3>
+            <p style="color: #721c24; margin: 0;">
+                <%= details.message || 'Suspicious activity detected on your account.' %>
+            </p>
+            <% if (details.ipAddress) { %>
+                <p style="color: #721c24; margin: 10px 0 0 0; font-size: 14px;">IP Address: <%= details.ipAddress %></p>
+            <% } %>
+            <% if (details.timestamp) { %>
+                <p style="color: #721c24; margin: 5px 0 0 0; font-size: 14px;">Time: <%= details.timestamp %></p>
+            <% } %>
+        </div>
+        <p style="color: #333; line-height: 1.6; margin-bottom: 30px;">
+            If this was you, no action is required. If you don't recognize this activity, please contact our security team immediately and change your password.
+        </p>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="<%= profileUrl %>" 
+               style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+                Review Security Settings
+            </a>
+        </div>
+    </div>
+</div>

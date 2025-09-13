@@ -1,0 +1,22 @@
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // The main logic is now in js/dashboard.js which is included above.
+            
+            // Tab switching functionality
+            window.showTab = function(tabId, event) {
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+                if (event && event.currentTarget) {
+                    event.currentTarget.classList.add('active');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

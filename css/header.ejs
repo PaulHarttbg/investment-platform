@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - WINNING EDGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <% if (typeof stylesheet !== 'undefined' && stylesheet) { %>
+        <link rel="stylesheet" href="/css/<%= stylesheet %>.css">
+    <% } %>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="/" class="logo-container" style="text-decoration: none;">
+                    <div class="logo-circle">
+                        <div class="logo-inner">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <span class="logo-text">WINNING EDGE</span>
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/packages" class="nav-link">Packages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/contact" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link login-btn">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/register" class="nav-link register-btn">Register</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>

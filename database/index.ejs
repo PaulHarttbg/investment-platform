@@ -1,0 +1,309 @@
+<%- include('partials/admin-header', { title: 'Admin Dashboard' }) %>
+<%- include('partials/admin-sidebar') %>
+
+<main class="admin-main">
+    <header class="admin-header">
+        <div class="header-content">
+            <h1 id="pageTitle">Dashboard</h1>
+            <div class="admin-user">
+                <div class="admin-avatar" id="adminAvatar">A</div>
+                <span id="adminUsername">Admin</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="admin-section active">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalUsers">0</div>
+                    <div class="stat-label">Total Users</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalDeposits">$0</div>
+                    <div class="stat-label">Total Deposits</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalInvestments">$0</div>
+                    <div class="stat-label">Active Investments</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalProfits">$0</div>
+                    <div class="stat-label">Total Profits Paid</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Recent Users</h3>
+                    <a href="#users">View All</a>
+                </div>
+                <div class="recent-users" id="recentUsers">
+                    <div class="empty-state">Loading...</div>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3>Pending Deposits</h3>
+                    <a href="#deposits">View All</a>
+                </div>
+                <div class="pending-deposits" id="pendingDeposits">
+                    <div class="empty-state">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Users Section -->
+    <section id="users" class="admin-section">
+        <div class="section-header">
+            <h2>User Management</h2>
+            <div class="header-actions">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="userSearch" class="form-input" placeholder="Search users...">
+                </div>
+                <button class="btn btn-primary" id="refreshUsers">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <button class="btn btn-success" id="exportUsersBtn">
+                    <i class="fas fa-file-export"></i> Export
+                </button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Login ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Balance</th>
+                        <th>Registered</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTable">
+                    <tr><td colspan="7" class="empty-state">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-controls" id="usersPagination">
+            <button class="btn btn-secondary" id="usersPrevPage" disabled>Previous</button>
+            <span id="usersPageInfo">Page 1 of 1</span>
+            <button class="btn btn-secondary" id="usersNextPage" disabled>Next</button>
+        </div>
+    </section>
+
+    <!-- Registration Tokens Section -->
+    <section id="tokens" class="admin-section">
+        <div class="section-header">
+            <h2>Registration Tokens</h2>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="generateTokenBtn">
+                    <i class="fas fa-plus"></i>
+                    Generate Token
+                </button>
+            </div>
+        </div>
+        <div class="tokens-container">
+            <div class="tokens-grid" id="tokensGrid">
+                <div class="no-tokens">
+                    <i class="fas fa-key"></i>
+                    <p>No tokens found. Generate your first token to get started.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deposits Section -->
+    <section id="deposits" class="admin-section">
+        <div class="section-header">
+            <h2>Deposit Management</h2>
+            <div class="header-actions">
+                <select class="filter-select" id="depositFilter">
+                    <option value="all">All Deposits</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                    <option value="failed">Failed</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>User</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="depositsTable">
+                    <tr><td colspan="7" class="empty-state">No deposits found</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Investments Section -->
+    <section id="investments" class="admin-section">
+        <div class="section-header">
+            <h2>Investment Overview</h2>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="processPayoutsBtn">
+                    <i class="fas fa-calculator"></i>
+                    Process Monthly Payouts
+                </button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Investment ID</th>
+                        <th>User</th>
+                        <th>Package</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody id="investmentsTable">
+                    <tr><td colspan="7" class="empty-state">No investments found</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-controls" id="investmentsPagination">
+            <button class="btn btn-secondary" id="investmentsPrevPage" disabled>Previous</button>
+            <span id="investmentsPageInfo">Page 1 of 1</span>
+            <button class="btn btn-secondary" id="investmentsNextPage" disabled>Next</button>
+        </div>
+    </section>
+
+    <!-- Transactions Section -->
+    <section id="transactions" class="admin-section">
+        <div class="section-header">
+            <h2>Transaction History</h2>
+            <div class="header-actions">
+                <select class="filter-select" id="transactionFilter">
+                    <option value="all">All Types</option>
+                    <option value="deposit">Deposits</option>
+                    <option value="withdrawal">Withdrawals</option>
+                    <option value="investment">Investments</option>
+                    <option value="payout">Payouts</option>
+                </select>
+                <select class="filter-select" id="transactionStatusFilter">
+                    <option value="all">All Statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                    <option value="failed">Failed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                <button class="btn btn-secondary" id="exportTransactionsBtn">
+                    <i class="fas fa-download"></i>
+                    Export
+                </button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionsTable">
+                    <tr><td colspan="7" class="empty-state">No transactions found</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-controls" id="transactionsPagination">
+            <button class="btn btn-secondary" id="transactionsPrevPage" disabled>Previous</button>
+            <span id="transactionsPageInfo">Page 1 of 1</span>
+            <button class="btn btn-secondary" id="transactionsNextPage" disabled>Next</button>
+        </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section id="reports" class="admin-section">
+        <div class="section-header">
+            <h2>Financial Reports</h2>
+            <div class="header-actions">
+                <select class="filter-select" id="reportPeriod">
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="year">This Year</option>
+                </select>
+            </div>
+        </div>
+        <div class="reports-grid">
+            <!-- Report cards will be loaded here -->
+        </div>
+    </section>
+
+    <!-- Settings Section -->
+    <section id="settings" class="admin-section">
+        <div class="section-header">
+            <h2>System Settings</h2>
+        </div>
+        <div class="settings-grid">
+            <div class="settings-card">
+                <h3>Crypto Wallets</h3>
+                <div class="wallet-settings">
+                    <div class="wallet-item">
+                        <label>Bitcoin (BTC) Address:</label>
+                        <input type="text" class="form-input" id="btcWallet" value="">
+                    </div>
+                    <div class="wallet-item">
+                        <label>Litecoin (LTC) Address:</label>
+                        <input type="text" class="form-input" id="ltcWallet" value="">
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="saveWalletSettingsBtn">Save Wallets</button>
+            </div>
+            <div class="settings-card">
+                <h3>Investment Packages</h3>
+                <div class="package-settings">
+                    <!-- Package settings will be loaded here -->
+                </div>
+                <button class="btn btn-primary" id="savePackageSettingsBtn">Save Packages</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/admin-footer') %>

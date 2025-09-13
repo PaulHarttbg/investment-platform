@@ -1,0 +1,327 @@
+<%- include('partials/header', { title: 'Investment Packages', stylesheet: 'packages' }) %>
+
+<main class="dashboard-main">
+    <div class="container">
+        <div class="packages-container">
+            <div class="packages-header">
+                <h1>Investment Packages</h1>
+                <p>Choose the perfect investment plan to grow your wealth</p>
+            </div>
+
+            <div class="packages-grid">
+                <div class="package-card featured">
+                    <div class="package-badge">Most Popular</div>
+                    <div class="package-header">
+                        <h3 class="package-title">Starter Package</h3>
+                        <div class="package-return">
+                            <span class="return-rate">8%</span>
+                            <span class="return-period">Annual Return</span>
+                        </div>
+                    </div>
+                    <div class="package-details">
+                        <div class="package-duration">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>3 Months Duration</span>
+                        </div>
+                        <div class="package-minimum">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Minimum: $100</span>
+                        </div>
+                        <div class="package-maximum">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Maximum: $5,000</span>
+                        </div>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> Monthly profit distribution</li>
+                        <li><i class="fas fa-check"></i> Portfolio tracking</li>
+                        <li><i class="fas fa-check"></i> 24/7 customer support</li>
+                        <li><i class="fas fa-check"></i> Risk management</li>
+                        <li><i class="fas fa-check"></i> Mobile app access</li>
+                    </ul>
+                    <button class="package-btn" data-package="starter" data-return="8" data-duration="3" data-min="100" data-max="5000">
+                        Choose Starter
+                    </button>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-badge recommended">Recommended</div>
+                    <div class="package-header">
+                        <h3 class="package-title">Professional Package</h3>
+                        <div class="package-return">
+                            <span class="return-rate">10%</span>
+                            <span class="return-period">Annual Return</span>
+                        </div>
+                    </div>
+                    <div class="package-details">
+                        <div class="package-duration">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>6 Months Duration</span>
+                        </div>
+                        <div class="package-minimum">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Minimum: $1,000</span>
+                        </div>
+                        <div class="package-maximum">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Maximum: $25,000</span>
+                        </div>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> All Starter features</li>
+                        <li><i class="fas fa-check"></i> Advanced analytics</li>
+                        <li><i class="fas fa-check"></i> Priority customer support</li>
+                        <li><i class="fas fa-check"></i> Market insights</li>
+                        <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                    </ul>
+                    <button class="package-btn" data-package="professional" data-return="10" data-duration="6" data-min="1000" data-max="25000">
+                        Choose Professional
+                    </button>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-badge vip">VIP</div>
+                    <div class="package-header">
+                        <h3 class="package-title">Premium Package</h3>
+                        <div class="package-return">
+                            <span class="return-rate">12%</span>
+                            <span class="return-period">Annual Return</span>
+                        </div>
+                    </div>
+                    <div class="package-details">
+                        <div class="package-duration">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>12 Months Duration</span>
+                        </div>
+                        <div class="package-minimum">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Minimum: $5,000</span>
+                        </div>
+                        <div class="package-maximum">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Maximum: $100,000</span>
+                        </div>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> All Professional features</li>
+                        <li><i class="fas fa-check"></i> Maximum returns</li>
+                        <li><i class="fas fa-check"></i> VIP support line</li>
+                        <li><i class="fas fa-check"></i> Exclusive market reports</li>
+                        <li><i class="fas fa-check"></i> Personal investment advisor</li>
+                    </ul>
+                    <button class="package-btn" data-package="premium" data-return="12" data-duration="12" data-min="5000" data-max="100000">
+                        Choose Premium
+                    </button>
+                </div>
+            </div>
+
+            <div class="investment-calculator">
+                <h3>Investment Calculator</h3>
+                <div class="calculator-content">
+                    <div class="calculator-inputs">
+                        <div class="form-group">
+                            <label class="form-label">Investment Amount</label>
+                            <div class="input-group">
+                                <span class="input-prefix">$</span>
+                                <input type="number" class="form-input" id="investmentAmount" placeholder="1000" min="100" value="1000">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Package</label>
+                            <select class="form-input" id="selectedPackage">
+                                <option value="starter">Starter (8% - 3 months)</option>
+                                <option value="professional">Professional (10% - 6 months)</option>
+                                <option value="premium">Premium (12% - 12 months)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="calculator-results">
+                        <div class="result-item">
+                            <span class="result-label">Monthly Return:</span>
+                            <span class="result-value" id="monthlyReturn">$6.67</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Return:</span>
+                            <span class="result-value" id="totalReturn">$20.00</span>
+                        </div>
+                        <div class="result-item total">
+                            <span class="result-label">Final Amount:</span>
+                            <span class="result-value" id="finalAmount">$1,020.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="package-comparison">
+                <h3>Package Comparison</h3>
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Starter</th>
+                                <th>Professional</th>
+                                <th>Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Annual Return</td>
+                                <td>8%</td>
+                                <td>10%</td>
+                                <td>12%</td>
+                            </tr>
+                            <tr>
+                                <td>Duration</td>
+                                <td>3 months</td>
+                                <td>6 months</td>
+                                <td>12 months</td>
+                            </tr>
+                            <tr>
+                                <td>Minimum Investment</td>
+                                <td>$100</td>
+                                <td>$1,000</td>
+                                <td>$5,000</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum Investment</td>
+                                <td>$5,000</td>
+                                <td>$25,000</td>
+                                <td>$100,000</td>
+                            </tr>
+                            <tr>
+                                <td>Monthly Profits</td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Portfolio Tracking</td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                            </tr>
+                            <tr>
+                                <td>24/7 Support</td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Advanced Analytics</td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Priority Support</td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Account Manager</td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Personal Advisor</td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                            </tr>
+                            <tr>
+                                <td>VIP Support</td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="investment-info">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Secure Investment</h4>
+                        <p>Your investments are protected by advanced security measures and insurance coverage.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Proven Returns</h4>
+                        <p>Our track record shows consistent returns with professional portfolio management.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Flexible Terms</h4>
+                        <p>Choose from multiple investment durations to match your financial goals.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Expert Support</h4>
+                        <p>Get guidance from our team of experienced investment professionals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Investment Confirmation Modal -->
+<div id="investmentModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Confirm Your Investment</h2>
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="investment-summary">
+                <div class="summary-item">
+                    <span>Package:</span>
+                    <span id="modalPackageName">Starter Package</span>
+                </div>
+                <div class="summary-item">
+                    <span>Annual Return:</span>
+                    <span id="modalReturn">8%</span>
+                </div>
+                <div class="summary-item">
+                    <span>Duration:</span>
+                    <span id="modalDuration">3 months</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="modalInvestmentAmount">Investment Amount (USD)</label>
+                <input type="number" id="modalInvestmentAmount" class="form-input" value="1000">
+                <small>Min: $<span id="modalMinAmount">100</span>, Max: $<span id="modalMaxAmount">5,000</span></small>
+            </div>
+            <div class="investment-projection">
+                <h4>Your Projection</h4>
+                <div class="projection-item">
+                    <span>Monthly Return:</span>
+                    <span id="modalMonthlyReturn" class="value">$6.67</span>
+                </div>
+                <div class="projection-item">
+                    <span>Total Profit:</span>
+                    <span id="modalTotalProfit" class="value">$20.00</span>
+                </div>
+                <div class="projection-item total">
+                    <span>Final Amount:</span>
+                    <span id="modalFinalAmount" class="value">$1,020.00</span>
+                </div>
+            </div>
+            <div class="form-group-checkbox">
+                <input type="checkbox" id="agreeTerms">
+                <label for="agreeTerms">I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a>.</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="cancelInvestmentBtn" class="btn btn-secondary">Cancel</button>
+            <button id="confirmInvestmentBtn" class="btn btn-primary">Confirm Investment</button>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer', { script: 'packages' }) %>

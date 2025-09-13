@@ -45,7 +45,7 @@ const tokenRoutes = require('./routes/api/tokens');
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 const { sanitizeInput } = require('./middleware/validation');
 const database = require('./database/schema');
-const investmentProcessor = require('./jobs/investmentProcessor');
+const InvestmentProcessor = require('./jobs/investmentProcessor'); // No change here, just for context
 const appConfig = require('./config/appConfig');
 
 // Set request size limits
@@ -320,7 +320,8 @@ const startServer = async () => {
 
         // Start scheduled jobs in non-test environments
         if (process.env.NODE_ENV !== 'test') {
-            investmentProcessor.schedule();
+            const investmentProcessorInstance = new InvestmentProcessor(database.connection);
+            investmentProcessorInstance.schedule();
         }
 
         app.listen(PORT, () => {

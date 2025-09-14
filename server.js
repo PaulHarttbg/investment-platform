@@ -182,9 +182,10 @@ app.use((req, res, next) => {
 app.use(sanitizeInput);
 app.use(limiter);
 
-// Serve static assets from the root project directory.
-// A request to /css/style.css will serve the file /css/style.css.
-app.use(express.static(path.join(__dirname)));
+// Serve static assets from their respective directories for security and clarity.
+app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
 
 // API Routes

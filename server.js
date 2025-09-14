@@ -26,12 +26,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files from public directory
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'views'));
 const PORT = process.env.PORT || 3000;
-
-// Removed invalid/stray else if block and serveStatic usage
 
 // Import routes
 const investmentRoutes = require('./routes/investments');
@@ -47,12 +42,6 @@ const { sanitizeInput } = require('./middleware/validation');
 const database = require('./database/schema');
 const { InvestmentProcessor } = require('./jobs/investmentProcessor');
 const appConfig = require('./config/appConfig');
-
-// Set request size limits
-app.use(express.json({ limit: '10kb' }));
-app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-app.use(cookieParser());
-app.use(compression());
 
 // Slow down repeated requests
 const speedLimiter = slowDown({
@@ -115,6 +104,23 @@ app.use(helmet({
     xssFilter: true
 }));
 
+// Enable CORS with specific options
+const corsOptions = {
+    origin: function (origin, callback) {
+        const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000').split(',');
+        if (process.env.NODE_ENV !== 'production') {
+            allowedOrigins.push('http://localhost:3001', 'http://127.0.0.1:5501', 'http://localhost:5501');
+        }
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+};
+app.use(cors(corsOptions));
+
 // Session middleware
 app.use(session(sessionConfig));
 
@@ -144,95 +150,13 @@ if (process.env.NODE_ENV !== 'test') {
     app.use('/api/auth/forgot-password', authLimiter);
     app.use('/api/auth/reset-password', authLimiter);
 }
-// JSON parsing middleware with size limit
+
+// Core Middleware: Body parsing, cookie parsing, compression, logging
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-
-// Cookie parser with secret
-app.use(cookieParser(process.env.COOKIE_SECRET));
-
-// Compression middleware
+app.use(cookieParser(process.env.COOKIE_SECRET)); // Use secret for signed cookies
 app.use(compression());
-
-// Logging in development
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
-}
-
-// Enable CORS with specific options
-const corsOptions = {
-    origin: function (origin, callback) {
-        const allowedOrigins = [
-            'http://localhost:3000',
-            'http://localhost:3001',
-            'http://127.0.0.1:5501',
-            'http://localhost:5501',
-            ...(process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [])
-        ];
-        
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-    exposedHeaders: ['Authorization'],
-    optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error('Unhandled error:', err);
-    
-    // CSRF token errors
-    if (err.code === 'EBADCSRFTOKEN') {
-        return res.status(403).json({
-            error: 'Invalid CSRF token',
-            code: 'INVALID_CSRF_TOKEN'
-        });
-    }
-    
-    // Other errors
-    res.status(500).json({
-        error: process.env.NODE_ENV === 'production' 
-            ? 'Internal Server Error' 
-            : err.message,
-        ...(process.env.NODE_ENV !== 'production' && { stack: err.stack })
-    });
-});
-
-// Security headers middleware
-app.use((req, res, next) => {
-    // Prevent clickjacking
-    res.setHeader('X-Frame-Options', 'DENY');
-    
-    // Enable XSS protection
-    res.setHeader('X-XSS-Protection', '1; mode=block');
-    
-    // Prevent MIME type sniffing
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    
-    // Set Referrer-Policy
-    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-    
-    // Set Permissions-Policy
-    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-    
-    // Set Strict-Transport-Security
-    if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
-        res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
-    }
-    
-    next();
-});
-
-// CORS is already configured above with corsOptions
-// No need for duplicate configuration
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // Rate limiting
 const limiter = rateLimit({
@@ -256,15 +180,11 @@ app.use((req, res, next) => {
     next();
 });
 app.use(sanitizeInput);
+app.use(limiter);
 
-// Logging
-app.use(morgan('combined'));
-
-// Serve static pages and assets
+// Serve static assets from the root project directory.
+// A request to /css/style.css will serve the file /css/style.css.
 app.use(express.static(path.join(__dirname)));
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
 
 // API Routes
@@ -302,9 +222,6 @@ app.get('/forgot-password', (req, res) => res.render('forgot-password', { title:
 // Admin routes
 app.get('/admin', (req, res) => res.render('admin/index', { title: 'Admin Dashboard' }));
 app.get('/admin/login', (req, res) => res.render('admin/login', { title: 'Admin Login' }));
-
-// SPA fallback
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 // 404 handler
 app.use(notFoundHandler);

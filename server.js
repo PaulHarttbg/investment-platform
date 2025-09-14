@@ -45,7 +45,7 @@ const tokenRoutes = require('./routes/api/tokens');
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 const { sanitizeInput } = require('./middleware/validation');
 const database = require('./database/schema');
-const InvestmentProcessor = require('./jobs/investmentProcessor');
+const { InvestmentProcessor } = require('./jobs/investmentProcessor');
 const appConfig = require('./config/appConfig');
 
 // Set request size limits
